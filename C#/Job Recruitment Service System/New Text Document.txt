@@ -1,0 +1,54 @@
+viewApplicantsInfoForm	
+
+string jobID = "";
+        string user = "";
+
+        String pictureLocation = "";
+
+//ConnectionBlock
+        SqlConnection con = new SqlConnection(@"Data Source=PC\SQLEXPRESS;Initial Catalog=Job_Recruitment_Service_System_Data;Integrated Security=True");
+
+
+
+        public void show()
+        {
+            con.Open();
+            SqlDataAdapter sda = new SqlDataAdapter("select * from LoginData where Username='" + user + "' ", con);
+
+            DataTable dt = new DataTable();
+
+            sda.Fill(dt);
+
+            //
+
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                userTextBox.Text = dr[0].ToString();
+                
+                nameTextBox.Text = dr[2].ToString();
+                addressTextBox.Text = dr[3].ToString();
+                emailTextBox.Text = dr[4].ToString();
+                cellTextBox.Text = dr[5].ToString();
+                pictureLocation = dr[6].ToString();
+
+                Console.WriteLine(dr[0].ToString()+ "\n");
+                Console.WriteLine(dr[2].ToString() + "\n");
+                Console.WriteLine(dr[3].ToString() + "\n");
+                Console.WriteLine(dr[4].ToString() + "\n");
+                Console.WriteLine(dr[5].ToString() + "\n");
+                Console.WriteLine(dr[6].ToString() + "\n");
+            }
+
+
+
+            //
+            pictureBox.ImageLocation = pictureLocation;
+
+
+
+            con.Close();
+
+            
+
+        }
